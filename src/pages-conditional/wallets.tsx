@@ -1,5 +1,5 @@
 import React from "react"
-import { Center, Heading } from "@chakra-ui/react"
+import { Center } from "@chakra-ui/react"
 import styled from "@emotion/styled"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useIntl } from "react-intl"
@@ -19,7 +19,6 @@ import {
   Divider,
   GrayContainer,
   Page,
-  RightColumn,
   StyledCard,
   TwoColumnContent,
 } from "../components/SharedStyledComponents"
@@ -29,30 +28,136 @@ import QuizWidget from "../components/Quiz/QuizWidget"
 import { translateMessageId } from "../utils/translations"
 import { getImage, getSrc } from "../utils/image"
 import { Context } from "../types"
-import { Box, Flex, chakra } from "@chakra-ui/react"
-import { cover } from "polished"
 
-const StyledTwoColumnContent = chakra(TwoColumnContent)
+const StyledTwoColumnContent = styled(TwoColumnContent)`
+  margin-bottom: -2rem;
+  margin-top: 2rem;
+`
 
-const StyledRightColumn = chakra(RightColumn)
+const LeftColumn = styled.div`
+  flex: 0 1 50%;
+  margin-right: 2rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
+    max-width: 100%;
+    margin-right: 0;
+    margin-top: 0;
+  }
+`
 
-const StyledGrayContainer = chakra(GrayContainer)
+const RightColumn = styled.div`
+  flex: 0 1 50%;
+  margin-left: 2rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
+    margin-top: 3rem;
+    max-width: 100%;
+    margin-left: 0;
+  }
+`
 
-const FindWallet = chakra(GatsbyImage)
+const StyledRightColumn = styled(RightColumn)`
+  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
+    margin-top: 0rem;
+  }
+`
 
-const Intro = chakra(Content)
+const StyledGrayContainer = styled(GrayContainer)`
+  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
+    margin-top: 1rem;
+  }
+`
 
-const IntroTwoColumnContent = chakra(TwoColumnContent)
+const SubtitleTwo = styled.div`
+  font-size: 1.25rem;
+  line-height: 140%;
+  margin-bottom: 1.5rem;
+  color: ${(props) => props.theme.colors.text300};
+`
 
-const GradientContainer = chakra(GrayContainer)
+const SubtitleThree = styled.div`
+  font-size: 1.25rem;
+  line-height: 140%;
+  color: ${(props) => props.theme.colors.text};
+  margin-bottom: 1.5rem;
+  text-align: center;
+`
 
-const ChecklistItem = chakra(HorizontalCard)
+const FindWallet = styled(GatsbyImage)`
+  margin-top: 2rem;
+  max-width: 800px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+`
 
-const WalletType = chakra(HorizontalCard)
+const Intro = styled(Content)`
+  padding-bottom: 0;
+  h2 {
+    margin-bottom: 0;
+  }
+`
 
-const StyledCallout = chakra(Callout)
+const IntroTwoColumnContent = styled(TwoColumnContent)`
+  margin-bottom: 0;
+  padding-bottom: 0;
+`
 
-const CalloutCardContainer = chakra(CardContainer)
+const GradientContainer = styled(GrayContainer)`
+  background: linear-gradient(
+    49.21deg,
+    rgba(127, 127, 213, 0.2) 19.87%,
+    rgba(134, 168, 231, 0.2) 58.46%,
+    rgba(145, 234, 228, 0.2) 97.05%
+  );
+  margin: 3rem 0rem;
+  width: 100%;
+`
+
+const CodeBox = styled.div`
+  background: #000000;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+`
+
+const Code = styled.p`
+  font-family: monospace;
+  color: #ffffff;
+  margin-bottom: 0rem;
+`
+
+const ChecklistItem = styled(HorizontalCard)`
+  border: 0px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+`
+
+const WalletType = styled(HorizontalCard)`
+  min-width: 100%;
+  margin: 0.5rem 0rem;
+  border-radius: 0px;
+  align-items: center;
+`
+
+const StyledCallout = styled(Callout)`
+  flex: 1 1 424px;
+  min-height: 100%;
+`
+
+const CentralColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+`
+
+const CalloutCardContainer = styled(CardContainer)`
+  margin-top: 4rem;
+`
+
+const H2 = styled.h2`
+  /* margin: 0; */
+`
 
 const cards = [
   {
@@ -153,21 +258,14 @@ const WalletsPage = ({
         image={getSrc(data.ogImage)}
       />
       <PageHero content={heroContent} isReverse />
-      <StyledGrayContainer marginTop={{ lg: 4 }}>
-        <Intro paddingBottom={0} sx={{ h2: { mb: 0 } }}>
-          <Heading m="0">
+      <StyledGrayContainer>
+        <Intro>
+          <H2>
             <Translation id="page-wallets-whats-a-wallet" />
-          </Heading>
+          </H2>
         </Intro>
-        <IntroTwoColumnContent marginBottom={0} paddingBottom={0}>
-          <Box
-            flexGrow="0"
-            flexShrink="1"
-            flexBasis="50%"
-            mr={{ base: 0, lg: 8 }}
-            mt={{ lg: 0 }}
-            maxWidth={{ lg: "100%" }}
-          >
+        <IntroTwoColumnContent>
+          <LeftColumn>
             <p>
               <Translation id="page-wallets-description" />
             </p>
@@ -175,8 +273,8 @@ const WalletsPage = ({
               <Translation id="page-wallets-desc-2" />{" "}
             </p>
             <CardList content={guides} />
-          </Box>
-          <StyledRightColumn marginTop={{ lg: 0 }}>
+          </LeftColumn>
+          <StyledRightColumn>
             <p>
               <Translation id="page-wallets-desc-3" />
             </p>
@@ -198,18 +296,11 @@ const WalletsPage = ({
           </CardContainer>
         </Content>
       </StyledGrayContainer>
-      <StyledTwoColumnContent marginBottom={-8} marginTop={8}>
-        <Box
-          flexGrow="0"
-          flexShrink="1"
-          flexBasis="50%"
-          mr={{ base: 0, lg: 8 }}
-          mt={{ lg: 0 }}
-          maxWidth={{ lg: "100%" }}
-        >
-          <Heading m="0">
+      <StyledTwoColumnContent>
+        <LeftColumn>
+          <H2>
             <Translation id="page-wallets-accounts-addresses" />
-          </Heading>
+          </H2>
           <p>
             <Translation id="page-wallets-accounts-addresses-desc" />
           </p>
@@ -233,29 +324,17 @@ const WalletsPage = ({
           <p>
             <Translation id="page-wallets-most-wallets" />
           </p>
-        </Box>
-        <Box
-          flexGrow="0"
-          flexShrink="1"
-          flexBasis="50%"
-          marginTop={{ lg: 0 }}
-          maxWidth={{ lg: "100%" }}
-          marginLeft={{ base: 8, lg: 0 }}
-        >
-          <Heading m="0">
+        </LeftColumn>
+        <RightColumn>
+          <H2>
             <Translation id="page-wallets-types" />
-          </Heading>
+          </H2>
           <p>
             <Translation id="page-wallets-types-desc" />
           </p>
           <div>
             {types.map((type, idx) => (
               <WalletType
-                minWidth="100%"
-                marginTop={2}
-                marginBottom={2}
-                marginLeft={0}
-                marginRight={0}
                 key={idx}
                 emoji={type.emoji}
                 description={type.description}
@@ -263,69 +342,34 @@ const WalletsPage = ({
               />
             ))}
           </div>
-        </Box>
+        </RightColumn>
       </StyledTwoColumnContent>
-      <GradientContainer
-        bgGradient="linear-gradient(49.21deg, rgba(127, 127, 213, 0.2) 19.87%,
-    rgba(134, 168, 231, 0.2) 58.46%,
-    rgba(145, 234, 228, 0.2) 97.05%)"
-      >
+      <GradientContainer>
         <Content>
-          <Flex flexDirection="column" alignItems="center" mb="8">
-            //central column
-            <Heading m="0">
+          <CentralColumn>
+            <H2>
               <Translation id="page-wallets-features-title" />
-            </Heading>
-            <Box
-              fontSize={"xl"}
-              lineHeight={"140%"}
-              color="text"
-              marginBottom={6}
-              textAlign={"center"}
-            >
+            </H2>
+            <SubtitleThree>
               <Translation id="page-wallets-features-desc" />
-            </Box>
+            </SubtitleThree>
             <ButtonLink to="/wallets/find-wallet/">
               <Translation id="page-wallets-find-wallet-btn" />
             </ButtonLink>
-            <FindWallet
-              image={getImage(data.findWallet)!}
-              alt=""
-              marginTop={8}
-              maxWidth="800px"
-              backgroundSize="cover"
-              backgroundRepeat="no-repeat"
-              width="100%"
-            />
-          </Flex>
+            <FindWallet image={getImage(data.findWallet)!} alt="" />
+          </CentralColumn>
         </Content>
       </GradientContainer>
       <TwoColumnContent>
-        <Box
-          flexGrow="0"
-          flexShrink="1"
-          flexBasis="50%"
-          mr={{ base: 0, lg: 8 }}
-          mt={{ lg: 0 }}
-          maxWidth={{ lg: "100%" }}
-        >
-          <Heading m="0">
+        <LeftColumn>
+          <H2>
             <Translation id="page-wallets-stay-safe" />
-          </Heading>
-          <Box
-            fontSize={"xl"}
-            lineHeight={"140%"}
-            marginBottom={6}
-            color="text300"
-          >
+          </H2>
+          <SubtitleTwo>
             <Translation id="page-wallets-stay-safe-desc" />
-          </Box>
+          </SubtitleTwo>
           <div>
             <ChecklistItem
-              border={0}
-              display="flex"
-              alignItems="flex-start"
-              marginBottom={4}
               key="0"
               emoji=":white_check_mark:"
               title={translateMessageId(
@@ -338,10 +382,6 @@ const WalletsPage = ({
               )}
             />
             <ChecklistItem
-              border={0}
-              display="flex"
-              alignItems="flex-start"
-              marginBottom={4}
               key="1"
               emoji=":white_check_mark:"
               title={translateMessageId("page-wallets-seed-phrase", intl)}
@@ -353,20 +393,16 @@ const WalletsPage = ({
               <p>
                 <Translation id="page-wallets-seed-phrase-example" />
               </p>
-              <Box bg="black" p="2" mb="4" borderRadius="base">
-                <Box fontFamily="monospace" color="white" mb="0">
+              <CodeBox>
+                <Code>
                   <Translation id="page-wallets-seed-phrase-snippet" />
-                </Box>
-              </Box>
+                </Code>
+              </CodeBox>
               <p>
                 <Translation id="page-wallets-seed-phrase-write-down" />
               </p>
             </ChecklistItem>
             <ChecklistItem
-              border={0}
-              display="flex"
-              alignItems="flex-start"
-              marginBottom={4}
               key="2"
               emoji=":white_check_mark:"
               title={translateMessageId("page-wallets-bookmarking", intl)}
@@ -376,10 +412,6 @@ const WalletsPage = ({
               )}
             />
             <ChecklistItem
-              border={0}
-              display="flex"
-              alignItems="flex-start"
-              marginBottom={4}
               key="3"
               emoji=":white_check_mark:"
               title={translateMessageId("page-wallets-triple-check", intl)}
@@ -389,38 +421,24 @@ const WalletsPage = ({
               )}
             />
           </div>
-        </Box>
-        <Box
-          flexGrow="0"
-          flexShrink="1"
-          flexBasis="50%"
-          marginTop={{ lg: 0 }}
-          maxWidth={{ lg: "100%" }}
-          marginLeft={{ base: 8, lg: 0 }}
-        >
-          <Heading m="0">
+        </LeftColumn>
+        <RightColumn>
+          <H2>
             <Translation id="page-wallets-tips" />
-          </Heading>
-          <Box
-            fontSize={"xl"}
-            lineHeight={"140%"}
-            marginBottom={6}
-            color="text300"
-          >
+          </H2>
+          <SubtitleTwo>
             <Translation id="page-wallets-tips-community" />
-          </Box>
+          </SubtitleTwo>
           <CardList content={articles} />
-        </Box>
+        </RightColumn>
       </TwoColumnContent>
       <Content>
         <Divider />
-        <Heading m="0">
+        <H2>
           <Translation id="page-wallets-explore" />
-        </Heading>
-        <CalloutCardContainer marginTop={16}>
+        </H2>
+        <CalloutCardContainer>
           <StyledCallout
-            flex="1 1 424px"
-            minH="full"
             image={getImage(data.eth)}
             titleKey="page-wallets-get-some"
             alt={translateMessageId("page-wallets-get-some-alt", intl)}
@@ -433,8 +451,6 @@ const WalletsPage = ({
             </div>
           </StyledCallout>
           <StyledCallout
-            flex="1 1 424px"
-            minH="full"
             image={getImage(data.dapps)}
             titleKey="page-wallets-try-dapps"
             alt={translateMessageId("page-wallets-try-dapps-alt", intl)}
