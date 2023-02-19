@@ -1,5 +1,5 @@
 import React from "react"
-import { Center } from "@chakra-ui/react"
+import { Box, Center, Heading, Text } from "@chakra-ui/react"
 import styled from "@emotion/styled"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useIntl } from "react-intl"
@@ -35,12 +35,12 @@ import { translateMessageId } from "../utils/translations"
 import { getImage, getSrc } from "../utils/image"
 import { Context } from "../types"
 
-const Slogan = styled.p`
-  font-style: normal;
-  font-weight: normal;
-  font-size: 2rem;
-  line-height: 140%;
-`
+// const Slogan = styled.p`
+//   font-style: normal;
+//   font-weight: normal;
+//   font-size: 2rem;
+//   line-height: 140%;
+// `
 
 const Title = styled.h1`
   font-size: 0.875rem;
@@ -103,13 +103,13 @@ const Header = styled.header`
   }
 `
 
-const H2 = styled.h2`
-  margin-top: 0;
-`
+// const H2 = styled.h2`
+//   margin-top: 0;
+// `
 
-const H4 = styled.h4`
-  font-weight: 600;
-`
+// const H4 = styled.h4`
+//   font-weight: 600;
+// `
 
 const StyledCardContainer = styled(CardContainer)`
   margin-bottom: 2rem;
@@ -132,13 +132,13 @@ const TextDivider = styled.div`
   }
 `
 
-const CentralColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 960px;
-  margin: 4rem auto;
-`
+// const CentralColumn = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   max-width: 960px;
+//   margin: 4rem auto;
+// `
 
 const CentralActionCard = styled(ActionCard)`
   flex: none;
@@ -289,9 +289,14 @@ const EthPage = (props: PageProps<Queries.EthPageQuery, Context>) => {
             <Title>
               <Translation id="page-eth-whats-eth" />
             </Title>
-            <Slogan>
+            <Text
+              fontStyle={"normal"}
+              fontWeight={400}
+              fontSize={8}
+              lineHeight={"140%"}
+            >
               <Translation id="page-eth-currency-for-future" />
-            </Slogan>
+            </Text>
             <Subtitle>
               <Translation id="page-eth-is-money" />
             </Subtitle>
@@ -340,18 +345,27 @@ const EthPage = (props: PageProps<Queries.EthPageQuery, Context>) => {
         </Content>
       </GrayContainer>
       <Content>
-        <CentralColumn>
-          <H2>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+          maxWidth={"960px"}
+          marginTop={16}
+          marginBottom={16}
+          marginLeft={"auto"}
+          marginRight={"auto"}
+        >
+          <Heading marginTop={0}>
             <Translation id="page-eth-whats-unique" />
-          </H2>
+          </Heading>
           <p>
             <Translation id="page-eth-whats-unique-desc" />
           </p>
           <EthVideo />
           <div>
-            <H4>
+            <Heading fontWeight={"semibold"}>
               <Translation id="page-eth-fuels" />
-            </H4>
+            </Heading>
             <p>
               <Translation id="page-eth-fuels-desc" />
             </p>
@@ -383,9 +397,9 @@ const EthPage = (props: PageProps<Queries.EthPageQuery, Context>) => {
           />
           <TextDivider />
           <div>
-            <H4>
+            <Heading fontWeight={"semibold"}>
               <Translation id="page-eth-underpins" />
-            </H4>
+            </Heading>
             <p>
               <Translation id="page-eth-underpins-desc" />
             </p>
@@ -404,9 +418,9 @@ const EthPage = (props: PageProps<Queries.EthPageQuery, Context>) => {
           </div>
           <TextDivider />
           <div>
-            <H4>
+            <Heading fontWeight={"semibold"}>
               <Translation id="page-eth-uses" />
-            </H4>
+            </Heading>
             <p>
               <Translation id="page-eth-uses-desc" />
             </p>
@@ -441,7 +455,7 @@ const EthPage = (props: PageProps<Queries.EthPageQuery, Context>) => {
             </ul>
           </div>
           <Divider />
-        </CentralColumn>
+        </Box>
         <StyledCalloutBanner
           titleKey={"page-eth-where-to-buy"}
           descriptionKey={"page-eth-where-to-buy-desc"}
@@ -493,9 +507,9 @@ const EthPage = (props: PageProps<Queries.EthPageQuery, Context>) => {
           <p>
             <Translation id="page-eth-not-only-crypto-desc-2" />
           </p>
-          <h4>
+          <Heading fontWeight={"semibold"}>
             <Translation id="page-eth-more-on-tokens" />
-          </h4>
+          </Heading>
           <CardList content={tokenLinks} />
         </LeftColumn>
         <RightColumn>
