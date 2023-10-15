@@ -143,6 +143,7 @@ const MobileNavMenu: React.FC<IProps> = ({
         zIndex={2000}
         {...props}
       >
+        Krishna
         <Icon
           viewBox="0 0 24 40"
           pointerEvents={isMenuOpen ? "none" : "auto"}
